@@ -7,6 +7,11 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+/**
+ * ManagedBean for helloworld-web basic application.
+ * 
+ * @author JaviCallaghan
+ */
 @ManagedBean
 @SessionScoped
 public class HelloworldBean implements Serializable {
@@ -28,14 +33,22 @@ public class HelloworldBean implements Serializable {
 		result = "";
 	}
 
-	/* JSF navigation method (from index.xhtml) */
+	/**
+	 * Method to perform a greeting to be displayed after navigation (to helloworld.xhtml for default JSF navigation).
+	 * 
+	 * @return navigation action
+	 */
 	public String greet() {
 		log.info("Greeting name = " + name);
 		result = "Hello world " + name + "!!";
 		return "helloworld";
 	}
 
-	/* JSF navigation method (from hello.xhtml) */
+	/**
+	 * Method to reset session status to be displayed after navigation (to index.xhtml for default JSF navigation).
+	 * 
+	 * @return navigation action
+	 */
 	public String back() {
 		result = "";
 		name = "<Input name>";
