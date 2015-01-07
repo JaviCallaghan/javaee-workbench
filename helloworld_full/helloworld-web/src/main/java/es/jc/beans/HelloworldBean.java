@@ -1,11 +1,16 @@
 package es.jc.beans;
 
 import java.io.Serializable;
+import java.util.Locale;
 import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.inject.Inject;
+
+import es.jc.helloworld.Greeter;
+import es.jc.helloworld.Helloworld;
 
 /**
  * ManagedBean for helloworld-web basic application.
@@ -20,8 +25,13 @@ public class HelloworldBean implements Serializable {
 	private static final Logger log = Logger.getLogger("HelloworldBean");
 
 	private String name;
+	private String lang;
 
 	private String result;
+
+	@Inject
+	@Helloworld
+	private Greeter greeter;
 
 	/**
 	 * Default constructor.
@@ -33,6 +43,7 @@ public class HelloworldBean implements Serializable {
 	public void init() {
 		log.info("HelloworldBean - Initializing bean...");
 		name = "<Input name>";
+		lang = "en";
 		result = "";
 	}
 
@@ -43,7 +54,7 @@ public class HelloworldBean implements Serializable {
 	 */
 	public String greet() {
 		log.info("Greeting name = " + name);
-		result = "Hello world " + name + "!!";
+		result = greeter.greet(name, new Locale(lang));
 		return "helloworld";
 	}
 
@@ -54,7 +65,7 @@ public class HelloworldBean implements Serializable {
 	 */
 	public String back() {
 		result = "";
-		name = "<Input name>";
+		init();
 		return "index";
 	}
 
@@ -66,8 +77,20 @@ public class HelloworldBean implements Serializable {
 		this.name = name;
 	}
 
+	public String getLang() {
+		return lang;
+	}
+
+	public void setLang(String lang) {
+		this.lang = lang;
+	}
+
 	public String getResult() {
 		return result;
+	}
+
+	public void setGreeter(Greeter greeter) {
+		this.greeter = greeter;
 	}
 
 }
