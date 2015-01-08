@@ -91,7 +91,7 @@
 
 	<profiles>
 		<profile>
-			<id>helloworld_injection</id>
+			<id>helloworld_full</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
